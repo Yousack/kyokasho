@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import TextbookLayout from "../../layouts/TextbookLayout.astro";
+
+const entries = (await getCollection(
+  "textbook",
+  ({ id }) => !id.endsWith("AGENTS"),
+)).sort((a, b) => a.id.localeCompare(b.id, "ja"));
+
+const titleOf = (entry: (typeof entries)[number]) =>
+  entry.body?.match(/^#\s+(.+)$/m)?.[1] ??
+  entry.id.split("/").at(-1) ??
+  entry.id;
+
+const hrefOf = (id: string) =>
+  import.meta.env.BASE_URL +
+  "textbook/" +
+  id.split("/").map(encodeURIComponent).join("/") +
+  "/";
+---
+
+<TextbookLayout title="Markdown版 教科書">
+  <h1>Markdown版 教科書</h1>
+  <p class="lead">
+    リポジトリ内の原稿をそのまま公開しています。数式はKaTeXで組版されます。
+  </p>
+  <ul class="chapter-list">
+    {entries.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+</TextbookLayout>
