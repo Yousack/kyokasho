@@ -1,3 +1,8 @@
+# Node and Astro
+node_modules/
+dist/
+.astro/
+
 # Python caches and environments
 __pycache__/
 *.py[cod]
