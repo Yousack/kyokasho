@@ -10,7 +10,7 @@ const markdown = {
 
 export default defineConfig({
   site: "https://yousack.github.io",
-  base: "/kyokasho",
+  base: "/kyokasho/",
   markdown,
   integrations: [mdx(markdown)],
 });
