@@ -1,0 +1,18 @@
+---
+layout: ../layouts/TextbookLayout.astro
+title: インタラクティブ教科書
+---
+
+import LinearMapLab from "../components/LinearMapLab.astro";
+
+# 数学は、動かすと見えてくる。
+
+<p class="lead">定義を暗記する前に、対象を動かし、変化しないものを見つける。文章・数式・操作できる図を一つの説明として編むWeb教科書です。</p>
+
+<LinearMapLab />
+
+## 教科書の入口
+
+<ul class="chapter-list">
+  <li><a href={import.meta.env.BASE_URL + "linear-algebra/"}>線形代数 — 基本ベクトルの行き先から始める</a></li>
+</ul>
