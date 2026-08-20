@@ -1,0 +1,75 @@
+<section class="lab" aria-labelledby="linear-map-title">
+  <div>
+    <p class="eyebrow">操作できる図</p>
+    <h2 id="linear-map-title">基底ベクトルの行き先を変える</h2>
+    <p>4本のスライダーは、2本の基底ベクトルの行き先を決めます。その2本が決まれば、平面上のすべてのベクトルの行き先も決まります。</p>
+    <div class="controls">
+      <label>e₁ の x <input data-key="a" type="range" min="-2" max="2" step="0.1" value="1.4" /></label>
+      <label>e₁ の y <input data-key="c" type="range" min="-2" max="2" step="0.1" value="0.3" /></label>
+      <label>e₂ の x <input data-key="b" type="range" min="-2" max="2" step="0.1" value="-0.4" /></label>
+      <label>e₂ の y <input data-key="d" type="range" min="-2" max="2" step="0.1" value="1.2" /></label>
+    </div>
+    <output aria-live="polite"></output>
+  </div>
+  <svg viewBox="0 0 420 420" role="img" aria-label="線形写像で変形する格子">
+    <g data-grid></g>
+    <line data-e1 x1="210" y1="210" />
+    <line data-e2 x1="210" y1="210" />
+    <circle cx="210" cy="210" r="4" />
+  </svg>
+</section>
+
+<script>
+  const lab = document.currentScript?.previousElementSibling;
+  if (lab instanceof HTMLElement) {
+    const inputs = [...lab.querySelectorAll("input")];
+    const grid = lab.querySelector("[data-grid]");
+    const output = lab.querySelector("output");
+    const e1 = lab.querySelector("[data-e1]");
+    const e2 = lab.querySelector("[data-e2]");
+    const ns = "http://www.w3.org/2000/svg";
+    const scale = 52.5;
+    const center = 210;
+    const point = (x: number, y: number, m: Record<string, number>) => [center + scale * (m.a * x + m.b * y), center - scale * (m.c * x + m.d * y)];
+    const draw = () => {
+      const m = Object.fromEntries(inputs.map((input) => [input.dataset.key, Number(input.value)]));
+      if (!(grid && output && e1 && e2)) return;
+      grid.replaceChildren();
+      for (let n = -4; n <= 4; n++) {
+        for (const vertical of [true, false]) {
+          const [x1, y1] = point(vertical ? n : -4, vertical ? -4 : n, m);
+          const [x2, y2] = point(vertical ? n : 4, vertical ? 4 : n, m);
+          const line = document.createElementNS(ns, "line");
+          line.setAttribute("x1", String(x1)); line.setAttribute("y1", String(y1));
+          line.setAttribute("x2", String(x2)); line.setAttribute("y2", String(y2));
+          grid.append(line);
+        }
+      }
+      const [e1x, e1y] = point(1, 0, m);
+      const [e2x, e2y] = point(0, 1, m);
+      for (const [line, x, y] of [[e1, e1x, e1y], [e2, e2x, e2y]] as const) {
+        line.setAttribute("x2", String(x)); line.setAttribute("y2", String(y));
+      }
+      const det = m.a * m.d - m.b * m.c;
+      output.textContent = "行列 [[" + m.a.toFixed(1) + ", " + m.b.toFixed(1) + "], [" + m.c.toFixed(1) + ", " + m.d.toFixed(1) + "]]　面積倍率 det = " + det.toFixed(2);
+    };
+    inputs.forEach((input) => input.addEventListener("input", draw));
+    draw();
+  }
+</script>
+
+<style>
+  .lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: 2rem; margin: 3rem 0; padding: clamp(1rem, 4vw, 2rem); background: var(--panel); border: 1px solid var(--line); border-radius: 20px; }
+  .eyebrow { color: var(--accent); font-weight: 800; letter-spacing: .08em; font-size: .8rem; }
+  .lab h2 { margin-top: 0; }
+  .controls { display: grid; gap: .55rem; }
+  label { display: grid; grid-template-columns: 6rem 1fr; align-items: center; font-size: .9rem; }
+  input { accent-color: var(--accent); }
+  output { display: block; margin-top: 1rem; font-family: ui-monospace, monospace; font-size: .85rem; }
+  svg { width: 100%; border-radius: 12px; background: #f3f8f5; }
+  [data-grid] line { stroke: #aac6ba; stroke-width: 1; }
+  [data-e1], [data-e2] { stroke-width: 5; stroke-linecap: round; }
+  [data-e1] { stroke: #d14d36; }
+  [data-e2] { stroke: #1769aa; }
+  @media (max-width: 760px) { .lab { grid-template-columns: 1fr; } }
+</style>
