@@ -20,8 +20,8 @@
 </section>
 
 <script>
-  const lab = document.currentScript?.previousElementSibling;
-  if (lab instanceof HTMLElement) {
+  for (const lab of document.querySelectorAll<HTMLElement>(".lab:not([data-ready])")) {
+    lab.dataset.ready = "true";
     const inputs = [...lab.querySelectorAll("input")];
     const grid = lab.querySelector("[data-grid]");
     const output = lab.querySelector("output");
