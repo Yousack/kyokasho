@@ -6,10 +6,14 @@ This repository is an interactive, web-first mathematics textbook. The website i
 
 ## Content structure
 
-- Organize content conceptually as part → chapter → section.
-- Implement reader-facing routes as MDX under `src/pages/`.
-- A part or chapter may have its own introductory MDX page.
-- Begin each section with the learning objectives or questions the reader should be able to answer.
+- Organize the textbook conceptually as part → chapter → section, but use **one primary Markdown/MDX source file per chapter**.
+- Do not split ordinary sections or subsections into separate Markdown files. Inside a chapter file, represent them with `##` and `###` headings.
+- Split a chapter into multiple source files only when there is a concrete technical reason, such as a genuinely independent interactive application or an unusually large generated/reference artifact. Do not split merely because the chapter has many sections.
+- Keep chapter prose continuous so definitions, examples, motivation, and transitions can be edited and read in context.
+- Use directories primarily for parts, assets, figures, and chapter-specific interactive components rather than for one-file-per-section prose.
+- Implement reader-facing routes under `src/pages/`. Prefer one reader-facing route per chapter; use in-page anchors for sections.
+- A part may have its own introductory page when it provides meaningful orientation rather than merely repeating the table of contents.
+- At the beginning of each chapter, state the chapter's learning objectives or central questions. Individual sections need separate objectives only when useful.
 - Add narrower `AGENTS.md` files when a part or chapter needs additional conventions.
 
 ## Architecture
@@ -24,6 +28,9 @@ This repository is an interactive, web-first mathematics textbook. The website i
 ## Authoring principles
 
 - Begin from an action, transformation, concrete question, or visual intuition before formalizing a definition.
+- Optimize chapter structure for conceptual continuity rather than for small files. A section boundary should mark a genuine change of topic, not merely keep files short.
+- Introduce notation and terminology close to where they become necessary; avoid creating isolated micro-sections for definitions that are better explained in context.
+- Use explicit transitions between sections when one idea motivates the next.
 - Treat interactivity as part of the explanation, not decoration.
 - Give every interactive element a learning objective and a useful textual explanation.
 - Ensure controls work with keyboard input, use semantic HTML, and respect reduced-motion preferences.
