@@ -18,12 +18,18 @@ const hrefOf = (id: string) =>
   id.split("/").map(encodeURIComponent).join("/") +
   "/";
 
-const linearAlgebraPart1Prefix = "線形代数/第I部 ベクトルと線形変換/";
-const linearAlgebraPart1Chapters = entries.filter((entry) => {
-  if (!entry.id.startsWith(linearAlgebraPart1Prefix)) return false;
-  const relativeId = entry.id.slice(linearAlgebraPart1Prefix.length);
+const chapterEntries = (prefix: string) => entries.filter((entry) => {
+  if (!entry.id.startsWith(prefix)) return false;
+  const relativeId = entry.id.slice(prefix.length);
   return /^第\d+章 [^/]+$/.test(relativeId);
 });
+
+const linearAlgebraPart1Chapters = chapterEntries(
+  "線形代数/第I部 ベクトルと線形変換/",
+);
+const linearAlgebraPart2Chapters = chapterEntries(
+  "線形代数/第II部 連立一次方程式と部分空間/",
+);
 ---
 
 <TextbookLayout title="Markdown版 教科書">
@@ -36,6 +42,12 @@ const linearAlgebraPart1Chapters = entries.filter((entry) => {
   <h3>第I部 ベクトルと線形変換</h3>
   <ul class="chapter-list">
     {linearAlgebraPart1Chapters.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+  <h3>第II部 連立一次方程式と部分空間</h3>
+  <ul class="chapter-list">
+    {linearAlgebraPart2Chapters.map((entry) => (
       <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
     ))}
   </ul>
