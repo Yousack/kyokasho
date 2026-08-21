@@ -30,6 +30,9 @@ const linearAlgebraPart1Chapters = chapterEntries(
 const linearAlgebraPart2Chapters = chapterEntries(
   "線形代数/第II部 連立一次方程式と部分空間/",
 );
+const linearAlgebraPart3Chapters = chapterEntries(
+  "線形代数/第III部 行列式――空間の伸び縮みを測る/",
+);
 ---
 
 <TextbookLayout title="Markdown版 教科書">
@@ -48,6 +51,12 @@ const linearAlgebraPart2Chapters = chapterEntries(
   <h3>第II部 連立一次方程式と部分空間</h3>
   <ul class="chapter-list">
     {linearAlgebraPart2Chapters.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+  <h3>第III部 行列式――空間の伸び縮みを測る</h3>
+  <ul class="chapter-list">
+    {linearAlgebraPart3Chapters.map((entry) => (
       <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
     ))}
   </ul>
