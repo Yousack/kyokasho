@@ -17,6 +17,13 @@ const hrefOf = (id: string) =>
   "textbook/" +
   id.split("/").map(encodeURIComponent).join("/") +
   "/";
+
+const linearAlgebraPart1Prefix = "線形代数/第I部 ベクトルと線形変換/";
+const linearAlgebraPart1Chapters = entries.filter((entry) => {
+  if (!entry.id.startsWith(linearAlgebraPart1Prefix)) return false;
+  const relativeId = entry.id.slice(linearAlgebraPart1Prefix.length);
+  return /^第\d+章 [^/]+$/.test(relativeId);
+});
 ---
 
 <TextbookLayout title="Markdown版 教科書">
@@ -24,8 +31,11 @@ const hrefOf = (id: string) =>
   <p class="lead">
     リポジトリ内の原稿をそのまま公開しています。数式はKaTeXで組版されます。
   </p>
+
+  <h2>線形代数</h2>
+  <h3>第I部 ベクトルと線形変換</h3>
   <ul class="chapter-list">
-    {entries.map((entry) => (
+    {linearAlgebraPart1Chapters.map((entry) => (
       <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
     ))}
   </ul>
