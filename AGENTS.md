@@ -28,6 +28,9 @@ This repository is an interactive, web-first mathematics textbook. The website i
 ## Authoring principles
 
 - Begin from an action, transformation, concrete question, or visual intuition before formalizing a definition.
+- When several kinds of objects or operations could answer the opening question, explain why the chapter selects the one it studies. Do not present linearity, orthogonality, invertibility, or another restriction as arbitrary; state what structure it preserves and what that preservation lets the reader reconstruct or calculate.
+- In the opening development of linear algebra, proceed from a concrete input-output problem to a rule that acts on every input, then distinguish linear transformations from other possible rules. Introduce matrices only after showing that linearity makes the images of basis vectors sufficient to determine every output.
+- Distinguish an operation chosen separately for one input from a fixed transformation applied uniformly to all inputs. A single correspondence such as $\mathbf u\mapsto\mathbf v$ does not determine a transformation; make any resulting non-uniqueness explicit.
 - Optimize chapter structure for conceptual continuity rather than for small files. A section boundary should mark a genuine change of topic, not merely keep files short.
 - Introduce notation and terminology close to where they become necessary; avoid creating isolated micro-sections for definitions that are better explained in context.
 - Use explicit transitions between sections when one idea motivates the next.
