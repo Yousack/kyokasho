@@ -35,6 +35,7 @@ This repository is an interactive, web-first mathematics textbook. The website i
 - Give every interactive element a learning objective and a useful textual explanation.
 - Ensure controls work with keyboard input, use semantic HTML, and respect reduced-motion preferences.
 - Write reader-facing prose in Japanese unless the material explicitly requires another language.
+- Set definitions, theorems, and supplementary notes apart from the surrounding prose with a Markdown blockquote. Begin the block with a bold label such as `**定義（一次結合）**`, `**定理（階数・退化次数の定理）**`, or `**補足**`. Keep motivation and examples outside the box so the box contains the statement readers will want to find again.
 
 ## Development
 
