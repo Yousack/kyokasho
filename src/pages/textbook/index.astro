@@ -33,6 +33,18 @@ const linearAlgebraPart2Chapters = chapterEntries(
 const linearAlgebraPart3Chapters = chapterEntries(
   "線形代数/第III部 行列式――空間の伸び縮みを測る/",
 );
+const linearAlgebraPart4Chapters = chapterEntries(
+  "線形代数/第IV部 座標と表現行列/",
+);
+const linearAlgebraPart5Chapters = chapterEntries(
+  "線形代数/第V部 固有値と行列の標準化/",
+);
+const linearAlgebraPart6Chapters = chapterEntries(
+  "線形代数/第VI部 内積と直交性/",
+);
+const linearAlgebraPart7Chapters = chapterEntries(
+  "線形代数/第VII部 発展と応用/",
+);
 ---
 
 <TextbookLayout title="Markdown版 教科書">
@@ -57,6 +69,30 @@ const linearAlgebraPart3Chapters = chapterEntries(
   <h3>第III部 行列式――空間の伸び縮みを測る</h3>
   <ul class="chapter-list">
     {linearAlgebraPart3Chapters.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+  <h3>第IV部 座標と表現行列</h3>
+  <ul class="chapter-list">
+    {linearAlgebraPart4Chapters.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+  <h3>第V部 固有値と行列の標準化</h3>
+  <ul class="chapter-list">
+    {linearAlgebraPart5Chapters.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+  <h3>第VI部 内積と直交性</h3>
+  <ul class="chapter-list">
+    {linearAlgebraPart6Chapters.map((entry) => (
+      <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
+    ))}
+  </ul>
+  <h3>第VII部 発展と応用</h3>
+  <ul class="chapter-list">
+    {linearAlgebraPart7Chapters.map((entry) => (
       <li><a href={hrefOf(entry.id)}>{titleOf(entry)}</a></li>
     ))}
   </ul>
